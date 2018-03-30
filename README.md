@@ -1,4 +1,4 @@
-# aquaExternal
+# Champion
 
 A linux 64-bit CS:GO **training software**
 
