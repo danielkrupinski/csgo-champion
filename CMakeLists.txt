@@ -8,6 +8,6 @@ set(EXECUTABLE_OUTPUT_PATH ./aquaExternal/)
 
 set(CMAKE_BUILD_TYPE RELEASE)
 
-file(GLOB SOURCE_FILES "${CMAKE_SOURCE_DIR}/source/*.cpp")
+file(GLOB SOURCE_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 add_executable(aquaExternal ${SOURCE_FILES})
 target_link_libraries(aquaExternal "-lX11 -lconfig++" xdo)
