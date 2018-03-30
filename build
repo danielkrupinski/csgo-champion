@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cmake . || exit 1
+make -j$(grep "^processor" /proc/cpuinfo | wc -l) "$@" || exit 1
+
+echo "All done!"
