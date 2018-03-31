@@ -8,10 +8,10 @@ MusicKitChanger::MusicKitChanger(int MusicID, remote::Handle* csgo, remote::MapM
     if(!csgo->MusicKitChangerEnabled)
         return;
 
-    unsigned long localPlayer = 0;
-    unsigned int LocalPlayerIndex;
-    unsigned int originalMusicID;
-    unsigned int spoofedMusicID = MusicID;
+    //unsigned long localPlayer = 0;
+    //unsigned int LocalPlayerIndex;
+    //unsigned int originalMusicID;
+    //unsigned int spoofedMusicID = MusicID;
 
     csgo->Read((void*) csgo->m_addressOfLocalPlayer, &localPlayer, sizeof(long)); // TODO: GetLocalPlayerIndex from engine_client.so
 
