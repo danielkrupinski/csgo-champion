@@ -50,8 +50,7 @@ namespace remote
 		void* find(Handle handle, const char* data, const char* pattern);
 	};
 
-	class Handle
-	{
+	class Handle {
 	public:
 	unsigned long PlayerResourcesPointer;
 

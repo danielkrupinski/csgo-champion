@@ -27,7 +27,7 @@
 using namespace std;
 //using namespace libconfig;
 
-bool dumpOffsets = 0; // set to 1 if you want to dump offsets
+bool dumpOffsets = 1; // set to 1 if you want to dump offsets
 
 Display* display = XOpenDisplay(0);
 

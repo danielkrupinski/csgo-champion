@@ -140,7 +140,7 @@ namespace remote
 
     MapModuleMemoryRegion* Handle::GetRegionOfAddress(void* address)
     {
-        for (size_t i = 0; i < regions.size(); i++)
+        for (size_t i = 0; i!=regions.size(); ++i)
         {
             if (regions[i].start > (unsigned long) address && (regions[i].start + regions[i].end) <= (unsigned long) address)
                 return &regions[i];
