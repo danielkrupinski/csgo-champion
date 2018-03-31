@@ -10,10 +10,10 @@ struct Vector
 
 struct ColorRGBA
 {
-	float r;
-	float g;
-	float b;
-	float a;
+	double r;
+	double g;
+	double b;
+	double a;
 };
 
 struct Color
