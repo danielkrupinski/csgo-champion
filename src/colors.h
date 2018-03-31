@@ -1,3 +1,6 @@
+#ifndef COLORS_H
+#define COLORS_H
+
 /*---- Color definitions ----*/
 #define RESET		"\x1B[0m"
 #define RED			"\x1B[31m"
@@ -11,3 +14,5 @@
 /*------ Font styles ------*/
 #define BOLD		"\x1B[1m"
 #define UNDERLINE	"\x1B[4m"
+
+#endif // COLORS_H
