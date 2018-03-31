@@ -1,3 +1,5 @@
+#include <libconfig.h++>
+
 int keycodeGlow;
 int keycodeRCS;
 int keycodeTriggerToggle;
