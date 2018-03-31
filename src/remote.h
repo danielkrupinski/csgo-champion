@@ -86,7 +86,7 @@ namespace remote
 
 		void ParseMaps();
 
-		bool IsValid();
+		constexpr bool IsValid();
 		bool IsRunning();
 
 		bool Write(void* address, void* buffer, size_t size);

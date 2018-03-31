@@ -79,7 +79,7 @@ namespace remote
         return GetSymbolicLinkTarget(("/proc/" + pidStr + "/cwd"));
     }
 
-    bool Handle::IsValid()
+    constexpr bool Handle::IsValid()
     {
         return (pid != -1);
     }
