@@ -34,9 +34,9 @@ using namespace std;
 
 bool GetKeyCodeState(KeyCode keyCode);
 
-namespace cheat 
+namespace cheat
 {
-	template<class T> class CUtlVector 
+	template<class T> class CUtlVector
 	{
 	public:
 		T* DataPtr; // 0000 (054612C0)
@@ -46,28 +46,28 @@ namespace cheat
 		unsigned int DataPtrBack; // 0010 (054612D0)
 	};
 
-	struct GlowObjectDefinition_t 
+	struct GlowObjectDefinition_t
 	{
-		bool ShouldDraw( int nSlot ) const 
+		bool ShouldDraw( int nSlot ) const
 		{
 			return m_pEntity && ( m_nSplitScreenSlot == -1 || m_nSplitScreenSlot == nSlot ) && ( m_bRenderWhenOccluded || m_bRenderWhenUnoccluded );
 		}
 
-		bool IsUnused() const 
+		bool IsUnused() const
 		{
 			return m_nNextFreeSlot != GlowObjectDefinition_t::ENTRY_IN_USE;
 		}
 
-		long writeStart() 
+		long writeStart()
 		{
 			return (long(&(this)->m_flGlowRed) - long(this));
 		}
 
-		long writeEnd() 
+		long writeEnd()
 		{
 			return (long(&(this)->m_nNextFreeSlot) - long(this));
 		}
-		
+
 		void* m_pEntity;   				    //0x0000
 		float m_flGlowRed;					//0x0002
 		float m_flGlowGreen;				//0x0003
@@ -105,5 +105,4 @@ namespace cheat
 	extern void RCS(float sensitivity, float m_yaw, float m_pitch, Vector2D rcsValue, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 	extern void SpoofMusicKit(int MusicID, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 	extern void FovChanger(int fov, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
-	extern void NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 };

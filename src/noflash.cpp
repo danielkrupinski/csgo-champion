@@ -1,8 +1,15 @@
 #include "cheat.h"
 
-void cheat::NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
+class NoFlash {
+public:
+    NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
+private:
+
+};
+
+NoFlash::NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
 {
-	if(!csgo || !client)
+    if(!csgo || !client)
 		return;
 
 	if(!csgo->NoFlashEnabled)

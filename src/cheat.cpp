@@ -41,7 +41,7 @@ void rcsNormalize(Vector2D& value)
 		value.y = 0.f;
 }
 
-void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool healthBased, bool rainbow, bool paintBlack, remote::Handle* csgo, remote::MapModuleMemoryRegion* client) 
+void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool healthBased, bool rainbow, bool paintBlack, remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
 {
 	if (!csgo || !client)
 		return;
@@ -52,13 +52,13 @@ void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool
 	bzero(g_glow, sizeof(g_glow));
 
 	cheat::CGlowObjectManager manager;
-	
+
 	if(rainbowVal < 999999.f)
 		rainbowVal += 0.0005f;
 	else
 		rainbowVal = 0.f;
 
-	if (!csgo->Read((void*) csgo->m_addressOfGlowPointer, &manager, sizeof(cheat::CGlowObjectManager))) 
+	if (!csgo->Read((void*) csgo->m_addressOfGlowPointer, &manager, sizeof(cheat::CGlowObjectManager)))
 	{
 		Logger::error ("Cannot read Glow Address");
 		throw 1;
@@ -69,7 +69,7 @@ void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool
 
 	void* data_ptr = (void*) manager.m_GlowObjectDefinitions.DataPtr;
 
-	if (!csgo->Read(data_ptr, g_glow, sizeof(cheat::GlowObjectDefinition_t) * count)) 
+	if (!csgo->Read(data_ptr, g_glow, sizeof(cheat::GlowObjectDefinition_t) * count))
 	{
 		Logger::error ("Cannot read Glow Object");
 		throw 1;
@@ -79,39 +79,39 @@ void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool
 	size_t writeCount = 0;
 	unsigned long localPlayer = 0;
 	unsigned int teamNumber = 0;
-	
+
 	csgo->Read((void*) csgo->m_addressOfLocalPlayer, &localPlayer, sizeof(long));
 
-	if (localPlayer != 0) 
+	if (localPlayer != 0)
 	{
 		csgo->Read((void*) (localPlayer+0x128), &teamNumber, sizeof(int));
 	}
 
-	for (unsigned int i = 0; i < count; i++) 
+	for (unsigned int i = 0; i < count; i++)
 	{
-		if (g_glow[i].m_pEntity != NULL) 
+		if (g_glow[i].m_pEntity != NULL)
 		{
 			Entity ent;
 
-			if (csgo->Read(g_glow[i].m_pEntity, &ent, sizeof(Entity))) 
+			if (csgo->Read(g_glow[i].m_pEntity, &ent, sizeof(Entity)))
 			{
-				if (ent.m_iTeamNum != 2 && ent.m_iTeamNum != 3) 
+				if (ent.m_iTeamNum != 2 && ent.m_iTeamNum != 3)
 				{
 					g_glow[i].m_bRenderWhenOccluded = 0;
 					g_glow[i].m_bRenderWhenUnoccluded = 0;
 					continue;
 				}
-				
+
 				if(ent.m_iHealth < 1) // check if entity is a player
 					continue;
-				
+
 				if (g_glow[i].m_bRenderWhenOccluded == 1)
 					continue;
 
-				if (ent.m_iTeamNum == 2 || ent.m_iTeamNum == 3) 
+				if (ent.m_iTeamNum == 2 || ent.m_iTeamNum == 3)
 				{
 					if (teamNumber != ent.m_iTeamNum && !ent.m_bDormant)
-					{	
+					{
 						g_glow[i].m_bRenderWhenOccluded = 1;
 						g_glow[i].m_bRenderWhenUnoccluded = 0;
 
@@ -151,17 +151,17 @@ void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool
 							unsigned long clrRender = 0xff000000; // 0xAARRGGBB
 
 							csgo->Read((void*) ((unsigned long) g_glow[i].m_pEntity + 0xA8), &clrRenderOrig, sizeof(clrRenderOrig));
-							
+
 							if(clrRender != clrRenderOrig)
 								csgo->Write((void*) ((unsigned long) g_glow[i].m_pEntity + 0xA8), &clrRender, sizeof(clrRender));
 						}
-						
+
 						if(fullBloom == 0 || fullBloom == 1)
                         	g_glow[i].m_bFullBloomRender = fullBloom;
-						
+
 						if(glowStyle > 0 && glowStyle < 4)
 							g_glow[i].m_nGlowStyle = glowStyle;
-						
+
 						if(healthBased == 1)
 						{
 							g_glow[i].m_flGlowRed = (255 - 2.55 * ent.m_iHealth) / 255.0f;
@@ -172,13 +172,13 @@ void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool
 						else if(rainbow == 1)
 						{
 							ColorRGBA rainbowClr;
-							
+
 							rainbowClr.r = colors.r;
 							rainbowClr.g = colors.g;
 							rainbowClr.b = colors.b;
-							
+
 							rainbowify(rainbowClr);
-							
+
 							g_glow[i].m_flGlowRed = rainbowClr.r;
 							g_glow[i].m_flGlowGreen = rainbowClr.g;
 							g_glow[i].m_flGlowBlue = rainbowClr.b;
@@ -189,14 +189,14 @@ void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool
 							g_glow[i].m_flGlowGreen = colors.g;
 							g_glow[i].m_flGlowBlue = colors.b;
 						}
-						
+
 						g_glow[i].m_flGlowAlpha = colors.a;
 					}
 				}
 			}
 		}
 
-		if (csgo->GlowEnabled) 
+		if (csgo->GlowEnabled)
 		{
 			size_t bytesToCutOffEnd = sizeof(cheat::GlowObjectDefinition_t) - g_glow[i].writeEnd();
 			size_t bytesToCutOffBegin = (size_t) g_glow[i].writeStart();
@@ -215,23 +215,23 @@ void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool
 }
 
 void cheat::RCS(float sensitivity, float m_yaw, float m_pitch, Vector2D rcsValue, remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
-{	
+{
 	if(!csgo || !client)
 		return;
-	
+
 	if(!csgo->RCSEnabled)
 		return;
 
 	rcsNormalize(rcsValue);
-	
+
 	unsigned long localPlayer = 0;
 	unsigned int ShotsFired;
 	QAngle vecPunch;
 	QAngle angle;
-	
+
 	csgo->Read((void*) csgo->m_addressOfLocalPlayer, &localPlayer, sizeof(long));
-	
-	if (localPlayer != 0) 
+
+	if (localPlayer != 0)
 	{
 		csgo->Read((void*) (localPlayer+0x3764), &vecPunch, sizeof(vecPunch));
 		csgo->Read((void*) (localPlayer+0xAB90), &ShotsFired, sizeof(ShotsFired));
@@ -258,27 +258,27 @@ void cheat::SpoofMusicKit(int MusicID, remote::Handle* csgo, remote::MapModuleMe
 
 	if(!csgo->MusicKitChangerEnabled)
 		return;
-	
+
 	unsigned long localPlayer = 0;
 	unsigned int LocalPlayerIndex;
 	unsigned int originalMusicID;
 	unsigned int spoofedMusicID = MusicID;
 
 	csgo->Read((void*) csgo->m_addressOfLocalPlayer, &localPlayer, sizeof(long)); // TODO: GetLocalPlayerIndex from engine_client.so
-	
+
 	if(!localPlayer)
 		return;
-	
+
 	csgo->Read((void*) (localPlayer+0x94), &LocalPlayerIndex, sizeof(LocalPlayerIndex));
-	
+
 	if(!LocalPlayerIndex)
 		return;
-	
+
 	if(LocalPlayerIndex > 64) // Not a correct value.
 		return;
-		
+
 	csgo->Read((void*) (csgo->PlayerResourcesPointer), &csgo->m_addressOfPlayerResource, sizeof(unsigned long));
-		
+
 	csgo->Read((void*) (csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4)), &originalMusicID, sizeof(originalMusicID));
 
 	if(!originalMusicID)
@@ -299,18 +299,18 @@ void cheat::FovChanger(int fov, remote::Handle* csgo, remote::MapModuleMemoryReg
 
 	if(!csgo->FovChangerEnabled)
 		return;
-	
+
 	unsigned long localPlayer = 0;
 	bool isScoped;
 	//float fovRate = 0.000005f;
-	
+
 	csgo->Read((void*) csgo->m_addressOfLocalPlayer, &localPlayer, sizeof(long));
-	
+
 	if(localPlayer != 0)
 		csgo->Read((void*) (localPlayer+0x4146), &isScoped, sizeof(isScoped));
 	else
 		return;
-	
+
 	if(!isScoped)
 	{
 		//csgo->Write((void*) (localPlayer + 0x3738), &fovRate, sizeof(float));
@@ -318,27 +318,4 @@ void cheat::FovChanger(int fov, remote::Handle* csgo, remote::MapModuleMemoryReg
 		csgo->Write((void*) (localPlayer + 0x399C), &fov, sizeof(int)); // m_iFOVStart
 		csgo->Write((void*) (localPlayer + 0x3AF4), &fov, sizeof(int)); // m_iDefaultFOV
 	}
-}
-
-void cheat::NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
-{
-	if(!csgo || !client)
-		return;
-	
-	if(!csgo->NoFlashEnabled)
-		return;
-	
-	unsigned long localPlayer = 0;
-	float m_flFlashMaxAlpha;
-	float NoFlashAlpha = 0.f;
-	
-	csgo->Read((void*) csgo->m_addressOfLocalPlayer, &localPlayer, sizeof(long));
-	
-	if(!localPlayer)
-		return;
-	
-	csgo->Read((void*) (localPlayer + 0xABD4), &m_flFlashMaxAlpha, sizeof(m_flFlashMaxAlpha));
-	
-	if(m_flFlashMaxAlpha == 255.f && m_flFlashMaxAlpha != NoFlashAlpha)
-		csgo->Write((void*) (localPlayer + 0xABD4), &NoFlashAlpha, sizeof(float));
 }
