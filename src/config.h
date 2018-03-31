@@ -16,43 +16,43 @@ public:
 //private:
     libconfig::Config cfg;
     Display* display;
-    int keycodeGlow;
-    int keycodeRCS;
-    int keycodeTriggerToggle;
-    int keycodeTriggerKey;
+    int keycodeGlow {0};
+    int keycodeRCS {0};
+    int keycodeTriggerToggle {0};
+    int keycodeTriggerKey {0};
 
-    double enemyRed;
-    double enemyGreen;
-    double enemyBlue;
-    double enemyAlpha;
+    double enemyRed {0.0};
+    double enemyGreen {0.0};
+    double enemyBlue {0.0};
+    double enemyAlpha {0.0};
 
-    bool fullBloom;
-    int glowStyle;
+    bool fullBloom {0};
+    int glowStyle {0};
 
-    bool healthBased;
+    bool healthBased {0};
 
-    bool rainbowOn;
+    bool rainbowOn {0};
 
-    float sensitivity;
+    float sensitivity {0.0};
 
-    bool paintBlack;
+    bool paintBlack {0};
 
-    float m_pitch;
-    float m_yaw;
+    float m_pitch {0.0};
+    float m_yaw {0.0};
 
-    Vector2D rcsValue;
+    Vector2D rcsValue {0.0,0.0};
 
-    bool disablePostProcessing;
+    bool disablePostProcessing {0};
 
-    bool musicKitEnabled;
-    int musicKitID;
+    bool musicKitEnabled {0};
+    int musicKitID {0};
 
-    bool iFovEnabled;
-    int iFov;
+    bool iFovEnabled {0};
+    int iFov {0};
 
-    bool NoFlashEnabled;
+    bool NoFlashEnabled {0};
 
-    ColorRGBA colors;
+    ColorRGBA colors {0.0,0.0,0.0,0.0};
 
-    bool triggerKeyEnabled;
+    bool triggerKeyEnabled {0};
 };
