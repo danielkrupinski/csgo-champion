@@ -8,7 +8,7 @@ public:
     NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 private:
     unsigned long localPlayer {0};
-	float m_flFlashMaxAlpha {0};
+	float m_flFlashMaxAlpha {0.0f};
 	float NoFlashAlpha {0.0f};
 };
 
