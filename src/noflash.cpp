@@ -8,10 +8,6 @@ NoFlash::NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
 	if(!csgo->NoFlashEnabled)
 		return;
 
-	unsigned long localPlayer = 0;
-	float m_flFlashMaxAlpha;
-	float NoFlashAlpha = 0.f;
-
 	csgo->Read((void*) csgo->m_addressOfLocalPlayer, &localPlayer, sizeof(long));
 
 	if(!localPlayer)
