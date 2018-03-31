@@ -22,6 +22,7 @@
 #include "logger.h"
 #include "config.h"
 #include "noflash.h"
+#include "musickit_changer.h"
 
 using namespace std;
 using namespace libconfig;
