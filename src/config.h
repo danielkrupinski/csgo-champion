@@ -45,7 +45,7 @@ public:
     bool disablePostProcessing {0};
 
     bool musicKitEnabled {0};
-    int musicKitID {0};
+    unsigned musicKitID {0};
 
     bool iFovEnabled {0};
     int iFov {0};
