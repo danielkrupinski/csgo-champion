@@ -1,41 +1,44 @@
 #include <libconfig.h++>
 
-int keycodeGlow;
-int keycodeRCS;
-int keycodeTriggerToggle;
-int keycodeTriggerKey;
+class Config {
+private:
+    int keycodeGlow;
+    int keycodeRCS;
+    int keycodeTriggerToggle;
+    int keycodeTriggerKey;
 
-double enemyRed;
-double enemyGreen;
-double enemyBlue;
-double enemyAlpha;
+    double enemyRed;
+    double enemyGreen;
+    double enemyBlue;
+    double enemyAlpha;
 
-bool fullBloom;
-int glowStyle;
+    bool fullBloom;
+    int glowStyle;
 
-bool healthBased;
+    bool healthBased;
 
-bool rainbowOn;
+    bool rainbowOn;
 
-float sensitivity;
+    float sensitivity;
 
-bool paintBlack;
+    bool paintBlack;
 
-float m_pitch;
-float m_yaw;
+    float m_pitch;
+    float m_yaw;
 
-Vector2D rcsValue;
+    Vector2D rcsValue;
 
-bool disablePostProcessing;
+    bool disablePostProcessing;
 
-bool musicKitEnabled;
-int musicKitID;
+    bool musicKitEnabled;
+    int musicKitID;
 
-bool iFovEnabled;
-int iFov;
+    bool iFovEnabled;
+    int iFov;
 
-bool NoFlashEnabled;
+    bool NoFlashEnabled;
 
-ColorRGBA colors;
+    ColorRGBA colors;
 
-bool triggerKeyEnabled;
+    bool triggerKeyEnabled;
+};
