@@ -1,7 +1,21 @@
 #include <libconfig.h++>
+#include "types.h"
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
-class Config {
-private:
+#include <X11/keysym.h>
+#include <X11/keysymdef.h>
+
+#include <X11/extensions/XTest.h>
+
+class Cfg {
+public:
+    Cfg(Display* d) : display{d} {};
+    std::string getConfigValue(std::string property);
+    void updateConfigValues();
+//private:
+    libconfig::Config cfg;
+    Display* display;
     int keycodeGlow;
     int keycodeRCS;
     int keycodeTriggerToggle;
