@@ -15,6 +15,6 @@ NoFlash::NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
 
 	csgo->Read((void*) (localPlayer + 0xABD4), &m_flFlashMaxAlpha, sizeof(m_flFlashMaxAlpha));
 
-	if(m_flFlashMaxAlpha == 255.f && m_flFlashMaxAlpha != NoFlashAlpha)
+	if(m_flFlashMaxAlpha == 255.0f && m_flFlashMaxAlpha != NoFlashAlpha)
 		csgo->Write((void*) (localPlayer + 0xABD4), &NoFlashAlpha, sizeof(float));
 }
