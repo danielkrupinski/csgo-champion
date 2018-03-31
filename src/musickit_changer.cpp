@@ -1,6 +1,7 @@
 #include "musickit_changer.h"
 
 MusicKitChanger::MusicKitChanger(int MusicID, remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
+    : spoofedMusicID{MusicID}
 {
     if(!csgo || !client)
         return;

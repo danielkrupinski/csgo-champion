@@ -5,8 +5,7 @@
 
 class MusicKitChanger {
 public:
-    MusicKitChanger(int MusicID, remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
-        : spoofedMusicID{MusicID} {};
+    MusicKitChanger(int MusicID, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 private:
     unsigned long localPlayer {0};
     unsigned int LocalPlayerIndex {0};

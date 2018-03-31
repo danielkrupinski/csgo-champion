@@ -315,7 +315,7 @@ int main()
 
 		cheat::RCS(sensitivity, m_yaw, m_pitch, rcsValue, &csgo, &client);
 
-		cheat::SpoofMusicKit(musicKitID, &csgo, &client);
+		MusicKitChanger music_changer(musicKitID, &csgo, &client);
 
 		cheat::FovChanger(iFov, &csgo, &client);
 
