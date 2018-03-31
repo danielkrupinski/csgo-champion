@@ -3,7 +3,9 @@
 
 #include "cheat.h"
 
-void cheat::SpoofMusicKit(int MusicID, remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
+class MusicKitChanger {
+public:
+    MusicKitChanger(int MusicID, remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
 {
 	if(!csgo || !client)
 		return;
@@ -43,5 +45,6 @@ void cheat::SpoofMusicKit(int MusicID, remote::Handle* csgo, remote::MapModuleMe
 		cout << " on entity index " << dec << LocalPlayerIndex << endl;
 	}
 }
+};
 
 #endif // MUSICKIT_CHANGER_H
