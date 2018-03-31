@@ -1,3 +1,6 @@
+#ifndef CHEAT_H
+#define CHEAT_H
+
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
@@ -106,3 +109,5 @@ namespace cheat
 	extern void SpoofMusicKit(int MusicID, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 	extern void FovChanger(int fov, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 };
+
+#endif // CHEAT_H
