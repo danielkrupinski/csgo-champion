@@ -1,4 +1,7 @@
-struct Vector 
+#ifndef TYPES_H
+#define TYPES_H
+
+struct Vector
 {
 	float x;
 	float y;
@@ -13,17 +16,17 @@ struct ColorRGBA
 	float a;
 };
 
-struct Color 
+struct Color
 {
 	unsigned char _color[4];
 };
 
-struct Vector2D 
+struct Vector2D
 {
 	float x, y;
 };
 
-struct QAngle 
+struct QAngle
 {
 	float x;
 	float y;
@@ -205,7 +208,7 @@ struct CCSPlayer
 	int m_bHasControlledBotThisRound; // 0xC200
 };
 
-/*struct Entity 
+/*struct Entity
 {
 	char __buf_0x00[0x88]; // 0x0
 	unsigned int m_bIsAutoaimTarget; // 0x88
@@ -243,3 +246,5 @@ struct CCSPlayer
 	QAngle m_angNetworkAngles; // 0x158
 	Vector m_vecNetworkOrigin; // 0x164
 };*/
+
+#endif // TYPES_H
