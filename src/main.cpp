@@ -51,7 +51,7 @@ int main()
 {
 	Logger::init();
 
-	if (getuid() != 0)
+	if (getuid())
 	{
 		Logger::error(string("You need to be ") + UNDERLINE + "root");
 		return 0;
@@ -129,22 +129,21 @@ int main()
 		"\x48\x89\xe5\x74\x0e\x48\x8d\x05\x00\x00\x00\x00", //27/06/16
 		"xxxxxxxx????");
 
+    csgo.m_addressOfLocalPlayer = csgo.GetCallAddress((void*)(foundLocalPlayerLea+0x7));
+
+    unsigned long PlayerResourcesInstr = (long)client.find(csgo,
+    	"\x48\x8B\x05\x00\x00\x00\x00\x55\x48\x89\xE5\x48\x85\xC0\x74\x10\x48",
+    	"xxx????xxxxxxxxxx");
+
+    csgo.PlayerResourcesPointer = csgo.GetAbsoluteAddress((void*)(PlayerResourcesInstr), 3, 7);
+
 	unsigned long PostProcessInstr = (long)client.find(csgo,
 		"\x80\x3D\x00\x00\x00\x00\x00\x0F\x85\x00\x00\x00\x00\x85\xC9",
 		"xx????xxx????xx");
 
 	unsigned long PostProcessPointer = csgo.GetAbsoluteAddress((void*)PostProcessInstr, 2, 7);
 
-	unsigned long PlayerResourcesInstr = (long)client.find(csgo,
-			"\x48\x8B\x05\x00\x00\x00\x00\x55\x48\x89\xE5\x48\x85\xC0\x74\x10\x48",
-			"xxx????xxxxxxxxxx");
-
-	csgo.PlayerResourcesPointer = csgo.GetAbsoluteAddress((void*)(PlayerResourcesInstr), 3, 7);
-
-	csgo.m_addressOfLocalPlayer = csgo.GetCallAddress((void*)(foundLocalPlayerLea+0x7));
-
-	if(dumpOffsets)
-	{
+	if(dumpOffsets) {
 		Logger::address ("client_client.so:\t", client.start);
 		//Logger::address ("engine_client.so:\t", pEngine);
 
@@ -167,9 +166,8 @@ int main()
 	csgo.keycodeTriggerKey = cfg.keycodeTriggerKey;
 
 	cout << CYAN << endl;
-	cout << " aquaExternal for CS:GO initialized." << endl;
-	cout << "  > maintained by: hi im spacebar" << endl;
-	cout << "  > original authors: McSwaggens and s0beit" << endl;
+	cout << " Champion for CS:GO initialized.\n"
+	        "  > created by: Daniel Krupiński\n";
 	cout << RESET << endl;
 
 	char keys[32];
@@ -213,17 +211,15 @@ int main()
 			lastkeys[i] = keys[i];
 		}
 
-		bool postProcessOrig;
+		bool postProcessOrig {0};
 		csgo.Read((void*) (PostProcessPointer), &postProcessOrig, sizeof(postProcessOrig));
 
-		if(postProcessOrig != cfg.disablePostProcessing)
-		{
+		if (postProcessOrig != cfg.disablePostProcessing) {
 			if(cfg.disablePostProcessing == 0 || cfg.disablePostProcessing == 1) // prevent writes under 0 or over 1
 				csgo.Write((void*) (PostProcessPointer), &cfg.disablePostProcessing, sizeof(cfg.disablePostProcessing));
 		}
 
-		try
-		{
+		try {
 			cheat::GlowAndTrigger(cfg.colors, cfg.fullBloom, cfg.glowStyle, cfg.healthBased, cfg.rainbowOn, cfg.paintBlack, &csgo, &client);
 		}
 
@@ -233,13 +229,10 @@ int main()
 			break;
 		}
 
+        MusicKitChanger music_changer(cfg.musicKitID, &csgo, &client);
+        NoFlash no_flash(&csgo, &client);
 		cheat::RCS(cfg.sensitivity, cfg.m_yaw, cfg.m_pitch, cfg.rcsValue, &csgo, &client);
-
-		MusicKitChanger music_changer(cfg.musicKitID, &csgo, &client);
-
 		cheat::FovChanger(cfg.iFov, &csgo, &client);
-
-		NoFlash no_flash(&csgo, &client);
 
 		//updateConfigValues(); // this lags on some slow systems
 

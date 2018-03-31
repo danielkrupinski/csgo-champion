@@ -20,60 +20,57 @@
 
 #define FL_ONGROUND (1<<0)
 
-namespace remote
-{
+namespace remote {
 	class Handle;
 
-	struct MapModuleMemoryRegion
-	{
-	public:
+	struct MapModuleMemoryRegion {
 		// Memory
-		unsigned long start;
-		unsigned long end;
+		unsigned long start {0};
+		unsigned long end {0};
 
 		// Permissions
-		bool readable;
-		bool writable;
-		bool executable;
-		bool shared;
+		bool readable {0};
+		bool writable {0};
+		bool executable {0};
+		bool shared {0};
 
 		// File data
-		unsigned long offset;
-		unsigned char deviceMajor;
-		unsigned char deviceMinor;
-		unsigned long inodeFileNumber;
-		std::string pathname;
-		std::string filename;
+		unsigned long offset {0};
+		unsigned char deviceMajor {0};
+		unsigned char deviceMinor {0};
+		unsigned long inodeFileNumber {0};
+		std::string pathname {""};
+		std::string filename {""};
 
-		unsigned long client_start;
+		unsigned long client_start {0};
 
 		void* find(Handle handle, const char* data, const char* pattern);
 	};
 
 	class Handle {
 	public:
-	unsigned long PlayerResourcesPointer;
+	unsigned long PlayerResourcesPointer {0};
 
-	unsigned long m_addressOfGlowPointer;
-	unsigned long m_addressOfLocalPlayer;
-	unsigned long m_addressOfForceAttack;
-	unsigned long m_oAddressOfForceJump;
-	unsigned long m_addressOfAlt1;
-	unsigned long m_addressOfOnGround;
-	unsigned long m_addressOfPlayerResource = 0;
+	unsigned long m_addressOfGlowPointer {0};
+	unsigned long m_addressOfLocalPlayer {0};
+	unsigned long m_addressOfForceAttack {0};
+	unsigned long m_oAddressOfForceJump {0};
+	unsigned long m_addressOfAlt1 {0};
+	unsigned long m_addressOfOnGround {0};
+	unsigned long m_addressOfPlayerResource {0};
 
-	unsigned long a_engine_client;
+	unsigned long a_engine_client {0};
 
-	unsigned long m_dwEntityList;
+	unsigned long m_dwEntityList {0};
 
-	bool GlowEnabled;
-	bool RCSEnabled;
-	bool TriggerEnabled;
-	bool NoFlashEnabled;
-	bool MusicKitChangerEnabled;
-	bool FovChangerEnabled;
-	bool triggerKeyEnabled;
-	int keycodeTriggerKey;
+	bool GlowEnabled {0};
+	bool RCSEnabled {0};
+	bool TriggerEnabled {0};
+	bool NoFlashEnabled {0};
+	bool MusicKitChangerEnabled {0};
+	bool FovChangerEnabled {0};
+	bool triggerKeyEnabled {0};
+	int keycodeTriggerKey {0};
 
 		Handle() : pid{-1} {}
 		Handle(pid_t target);
@@ -81,7 +78,7 @@ namespace remote
 
 		std::string GetPath();
 		std::string GetWorkingDirectory();
-		pid_t GetPid(){ return pid; }
+		constexpr pid_t GetPid(){ return pid; }
 
 		void ParseMaps();
 
