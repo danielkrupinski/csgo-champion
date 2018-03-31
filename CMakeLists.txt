@@ -9,5 +9,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ./bin/)
 set(CMAKE_BUILD_TYPE RELEASE)
 
 file(GLOB SOURCE_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
-add_executable(aquaExternal ${SOURCE_FILES})
+add_executable(champion ${SOURCE_FILES})
 target_link_libraries(champion "-lX11 -lconfig++" xdo)
