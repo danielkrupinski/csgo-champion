@@ -102,7 +102,7 @@ void updateConfigValues()
 	iFovEnabled = ::atof(getConfigValue("fovEnabled").c_str());
 	iFov = ::atof(getConfigValue("fov").c_str());
 
-	NoFlash = ::atof(getConfigValue("noFlash").c_str());
+	NoFlashEnabled = ::atof(getConfigValue("noFlash").c_str());
 
 	triggerKeyEnabled = ::atof(getConfigValue("triggerKeyEnabled").c_str());
 
@@ -241,7 +241,7 @@ int main()
 	csgo.TriggerEnabled = false;
 	csgo.FovChangerEnabled = iFovEnabled;
 	csgo.MusicKitChangerEnabled = musicKitEnabled;
-	csgo.NoFlashEnabled = NoFlash;
+	csgo.NoFlashEnabled = NoFlashEnabled;
 	csgo.triggerKeyEnabled = triggerKeyEnabled;
 	csgo.keycodeTriggerKey = keycodeTriggerKey;
 
@@ -318,7 +318,7 @@ int main()
 
 		cheat::FovChanger(iFov, &csgo, &client);
 
-		NoFlash no_flash {&csgo, &client};
+		NoFlash no_flash;
 
 		//updateConfigValues(); // this lags on some slow systems
 
