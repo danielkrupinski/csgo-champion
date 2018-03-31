@@ -43,7 +43,7 @@ string getConfigValue(string property)
 		Logger::error(ss.str());
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 bool dumpOffsets = 0; // set to 1 if you want to dump offsets
