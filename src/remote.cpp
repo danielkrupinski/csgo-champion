@@ -41,7 +41,7 @@ namespace remote
             chunknum++;
         }
 
-        return NULL;
+        return nullptr;
     }
 
     // Handle
@@ -146,7 +146,7 @@ namespace remote
                 return &regions[i];
         }
 
-        return NULL;
+        return nullptr;
     }
 
     void Handle::ParseMaps()
@@ -274,8 +274,8 @@ unsigned long remote::getModule(const char * moduleName, pid_t pid)
 // Functions Exported
 bool remote::FindProcessByName(std::string name, remote::Handle* out)
 {
-    if(out == NULL || name.empty())
-    return false;
+    if(!out || name.empty())
+        return false;
 
     struct dirent *dire;
 
