@@ -1,5 +1,7 @@
 #include "noflash.h"
 
+using namespace std;
+
 NoFlash::NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
 {
     if(!csgo || !client)
