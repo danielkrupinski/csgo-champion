@@ -120,7 +120,7 @@ int main()
 
 	unsigned long glowcalladdr = csgo.GetCallAddress(foundGlowPointerCall);
 
-	int addressOfGlowPointerOffset;
+	int addressOfGlowPointerOffset {0};
 	csgo.Read((void*) (glowcalladdr + 0x10), &addressOfGlowPointerOffset, sizeof(int));
 
 	csgo.m_addressOfGlowPointer = glowcalladdr + 0x10 + addressOfGlowPointerOffset + 0x4;
@@ -179,11 +179,11 @@ int main()
 	{
 		XQueryKeymap(display, keys);
 
-		for (unsigned i = 0; i < sizeof(keys); ++i)
+		for (int i=0; i!=sizeof(keys); ++i)
 		{
 			if (keys[i] != lastkeys[i])
 			{
-				for (unsigned j = 0, test = 1; j < 8; ++j, test *= 2)
+				for (int j=0, test=1; j!=8; ++j, test*=2)
 				{
 					if ((keys[i] & test) && ((keys[i] & test) != (lastkeys[i] & test)))
 					{
