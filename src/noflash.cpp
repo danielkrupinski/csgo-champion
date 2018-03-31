@@ -1,12 +1,5 @@
 #include "noflash.h"
 
-class NoFlash {
-public:
-    NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
-private:
-
-};
-
 NoFlash::NoFlash(remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
 {
     if(!csgo || !client)
