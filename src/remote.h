@@ -76,7 +76,7 @@ namespace remote
 	bool triggerKeyEnabled;
 	int keycodeTriggerKey;
 
-		Handle() : pid(-1) {}
+		Handle() : pid{-1} {}
 		Handle(pid_t target);
 		Handle(std::string target);
 
