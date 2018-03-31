@@ -1,5 +1,5 @@
-#ifndef __REMOTE_H_
-#define __REMOTE_H_
+#ifndef REMOTE_H
+#define REMOTE_H
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -20,11 +20,11 @@
 
 #define FL_ONGROUND (1<<0)
 
-namespace remote 
+namespace remote
 {
 	class Handle;
 
-	struct MapModuleMemoryRegion 
+	struct MapModuleMemoryRegion
 	{
 	public:
 		// Memory
@@ -50,11 +50,11 @@ namespace remote
 		void* find(Handle handle, const char* data, const char* pattern);
 	};
 
-	class Handle 
+	class Handle
 	{
 	public:
 	unsigned long PlayerResourcesPointer;
-	
+
 	unsigned long m_addressOfGlowPointer;
 	unsigned long m_addressOfLocalPlayer;
 	unsigned long m_addressOfForceAttack;
@@ -64,7 +64,7 @@ namespace remote
 	unsigned long m_addressOfPlayerResource = 0;
 
 	unsigned long a_engine_client;
-	
+
 	unsigned long m_dwEntityList;
 
 	bool GlowEnabled;
@@ -113,4 +113,4 @@ namespace remote
 	bool FindProcessByName(std::string name, Handle* out);
 };
 
-#endif
+#endif // REMOTE_H
