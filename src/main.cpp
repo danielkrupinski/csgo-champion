@@ -21,6 +21,7 @@
 #include "cheat.h"
 #include "logger.h"
 #include "config.h"
+#include "noflash.h"
 
 using namespace std;
 using namespace libconfig;
