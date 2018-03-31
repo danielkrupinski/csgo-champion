@@ -1,4 +1,4 @@
-#include "cheat.h"
+#include "noflash.h"
 
 class NoFlash {
 public:

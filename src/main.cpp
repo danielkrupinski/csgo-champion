@@ -317,7 +317,7 @@ int main()
 
 		cheat::FovChanger(iFov, &csgo, &client);
 
-		NoFlash(&csgo, &client);
+		NoFlash no_flash {&csgo, &client};
 
 		//updateConfigValues(); // this lags on some slow systems
 
