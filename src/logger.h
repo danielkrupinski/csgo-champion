@@ -1,3 +1,6 @@
+#ifndef LOGGER_H
+#define LOGGER_H
+
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -14,7 +17,7 @@
 
 #define LOGGER_CLEAR_ON_START true
 
-namespace Logger 
+namespace Logger
 {
 	extern void init ();
 	extern void Log (std::string str);
@@ -25,3 +28,5 @@ namespace Logger
 	extern void error (std::string str);
 	extern std::string Endi (bool endi);
 };
+
+#endif // LOGGER_H
