@@ -71,7 +71,7 @@ int main()
 
 	stringstream ss;
 	ss << "\t PID:\t [";
-	ss << csgo.GetPid ();
+	ss << csgo.GetPid();
 	ss << "]";
 
 	Logger::normal (ss.str());
@@ -80,20 +80,16 @@ int main()
 
 	client.start = 0;
 
-	while (client.start == 0)
-	{
-		if (!csgo.IsRunning())
-		{
+	while (client.start == 0) {
+		if (!csgo.IsRunning()) {
 			Logger::error("The game is not even running!");
 			return 0;
 		}
 
 		csgo.ParseMaps();
 
-		for (auto region : csgo.regions)
-		{
-			if (region.filename.compare("client_client.so") == 0 && region.executable)
-			{
+		for (auto region : csgo.regions) {
+			if (region.filename.compare("client_client.so") == 0 && region.executable) {
 				client = region;
 				break;
 			}
@@ -143,7 +139,7 @@ int main()
 
 	unsigned long PostProcessPointer = csgo.GetAbsoluteAddress((void*)PostProcessInstr, 2, 7);
 
-	if(dumpOffsets) {
+	if (dumpOffsets) {
 		Logger::address ("client_client.so:\t", client.start);
 		//Logger::address ("engine_client.so:\t", pEngine);
 
@@ -211,22 +207,21 @@ int main()
 			lastkeys[i] = keys[i];
 		}
 
+        try {
+			cheat::GlowAndTrigger(cfg.colors, cfg.fullBloom, cfg.glowStyle, cfg.healthBased, cfg.rainbowOn, cfg.paintBlack, &csgo, &client);
+		}
+
+		catch (int exception) {
+			Logger::error("Couldn't find glow address, did you close the game?");
+			break;
+		}
+
 		bool postProcessOrig {0};
 		csgo.Read((void*) (PostProcessPointer), &postProcessOrig, sizeof(postProcessOrig));
 
 		if (postProcessOrig != cfg.disablePostProcessing) {
 			if(cfg.disablePostProcessing == 0 || cfg.disablePostProcessing == 1) // prevent writes under 0 or over 1
 				csgo.Write((void*) (PostProcessPointer), &cfg.disablePostProcessing, sizeof(cfg.disablePostProcessing));
-		}
-
-		try {
-			cheat::GlowAndTrigger(cfg.colors, cfg.fullBloom, cfg.glowStyle, cfg.healthBased, cfg.rainbowOn, cfg.paintBlack, &csgo, &client);
-		}
-
-		catch (int exception)
-		{
-			Logger::error("Couldn't find glow address, did you close the game?");
-			break;
 		}
 
         MusicKitChanger music_changer(cfg.musicKitID, &csgo, &client);

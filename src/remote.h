@@ -72,32 +72,32 @@ namespace remote {
 	bool triggerKeyEnabled {0};
 	int keycodeTriggerKey {0};
 
-		Handle() : pid{-1} {}
-		Handle(pid_t target);
-		Handle(std::string target);
+	Handle() : pid{-1} {}
+	Handle(pid_t target);
+	Handle(std::string target);
 
-		std::string GetPath();
-		std::string GetWorkingDirectory();
-		constexpr pid_t GetPid(){ return pid; }
+	std::string GetPath();
+	std::string GetWorkingDirectory();
+	constexpr pid_t GetPid(){ return pid; }
 
-		void ParseMaps();
+	void ParseMaps();
 
-		constexpr bool IsValid();
-		bool IsRunning();
+	constexpr bool IsValid();
+	bool IsRunning();
 
-		bool Write(void* address, void* buffer, size_t size);
-		bool Read(void* address, void* buffer, size_t size);
+	bool Write(void* address, void* buffer, size_t size);
+	bool Read(void* address, void* buffer, size_t size);
 
-		unsigned long GetCallAddress(void* address);
-		unsigned long GetAbsoluteAddress(void* address, int offset, int size);
+	unsigned long GetCallAddress(void* address);
+	unsigned long GetAbsoluteAddress(void* address, int offset, int size);
 
-		MapModuleMemoryRegion* GetRegionOfAddress(void* address);
+	MapModuleMemoryRegion* GetRegionOfAddress(void* address);
 
 	private:
 		std::string GetSymbolicLinkTarget(std::string target);
 
-		pid_t pid;
-		std::string pidStr;
+		pid_t pid {-1};
+		std::string pidStr {""};
 		//FILE* memr;
 		//FILE* memw;
 
@@ -105,7 +105,7 @@ namespace remote {
 		std::vector<MapModuleMemoryRegion> regions;
 	};
 
-	unsigned long getModule(const char * modname, pid_t pid);
+	unsigned long getModule(const char* modname, pid_t pid);
 	bool FindProcessByName(std::string name, Handle* out);
 };
 
