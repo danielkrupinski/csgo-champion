@@ -10,7 +10,7 @@ private:
     unsigned long localPlayer {0};
     unsigned int LocalPlayerIndex {0};
     unsigned int originalMusicID {0};
-    unsigned int spoofedMusicID {0}; //MusicID;
+    unsigned int spoofedMusicID {0};
 };
 
 #endif // MUSICKIT_CHANGER_H
