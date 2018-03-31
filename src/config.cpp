@@ -11,7 +11,7 @@ string Cfg::getConfigValue(string property)
 		return name;
 	}
 
-	catch (const SettingNotFoundException &nfex) {
+	catch (const SettingNotFoundException& nfex) {
 		stringstream ss;
 		ss << "Cannot find property: '" << property << "' in config.cfg file";
 		Logger::error(ss.str());
@@ -26,11 +26,11 @@ void Cfg::updateConfigValues()
 		cfg.readFile("config.cfg");
 	}
 
-	catch (const FileIOException &fioex) {
+	catch (const FileIOException& fioex) {
 		Logger::error("Error reading config file!");
 	}
 
-	catch (const ParseException &pex) {
+	catch (const ParseException& pex) {
 		stringstream ss;
 		ss << "Parsing error at " << pex.getFile() << ":" << pex.getLine() << " - " << pex.getError();
 		Logger::error(ss.str());
