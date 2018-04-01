@@ -31,11 +31,11 @@ constexpr bool dumpOffsets {0}; // set to 1 if you want to dump offsets
 
 Display* display = XOpenDisplay(0);
 
-Cfg cfg(display);
+Cfg cfg {display};
 
 bool GetKeyCodeState(KeyCode keyCode)
 {
-    if(!display)
+    if (!display)
     {
         return false;
     }
