@@ -15,7 +15,7 @@ using namespace std;
 
 static xdo_t *xdo = xdo_new(NULL);
 
-const double pi = 3.1415926535897;
+constexpr double pi = 3.1415926535897;
 
 float rainbowVal = 0.f;
 
