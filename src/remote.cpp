@@ -304,9 +304,9 @@ bool remote::FindProcessByName(std::string name, remote::Handle* out)
 
             size_t namePos = procPath.find_last_of('/');
 
-            // Negative unsigned???
-            //if(namePos == -1)
-            //continue; // what?
+
+            if(namePos == -1)
+                continue; // what?
 
             std::string exeName = procPath.substr(namePos + 1);
 
