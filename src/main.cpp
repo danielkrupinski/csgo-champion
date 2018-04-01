@@ -23,6 +23,7 @@
 #include "config.h"
 #include "noflash.h"
 #include "musickit_changer.h"
+#include "offsets.h"
 
 using namespace std;
 //using namespace libconfig;
@@ -100,6 +101,7 @@ int main()
 
 	client.client_start = client.start;
 
+    Offsets offsets {csgo, client};
 	//unsigned long pEngine = remote::getModule("engine_client.so", csgo.GetPid());
 
 	/*if (pEngine == 0)
@@ -110,43 +112,16 @@ int main()
 
 	//csgo.a_engine_client = pEngine;
 
-	void* foundGlowPointerCall = client.find(csgo,
-		"\xE8\x00\x00\x00\x00\x48\x8b\x3d\x00\x00\x00\x00\xBE\x01\x00\x00\x00\xC7", // 2017-10-06
-		"x????xxx????xxxxxx");
 
-	unsigned long glowcalladdr = csgo.GetCallAddress(foundGlowPointerCall);
-
-	int addressOfGlowPointerOffset {0};
-	csgo.Read((void*) (glowcalladdr + 0x10), &addressOfGlowPointerOffset, sizeof(int));
-
-	csgo.m_addressOfGlowPointer = glowcalladdr + 0x10 + addressOfGlowPointerOffset + 0x4;
-
-	unsigned long foundLocalPlayerLea = (long)client.find(csgo,
-		"\x48\x89\xe5\x74\x0e\x48\x8d\x05\x00\x00\x00\x00", //27/06/16
-		"xxxxxxxx????");
-
-    csgo.m_addressOfLocalPlayer = csgo.GetCallAddress((void*)(foundLocalPlayerLea+0x7));
-
-    unsigned long PlayerResourcesInstr = (long)client.find(csgo,
-    	"\x48\x8B\x05\x00\x00\x00\x00\x55\x48\x89\xE5\x48\x85\xC0\x74\x10\x48",
-    	"xxx????xxxxxxxxxx");
-
-    csgo.PlayerResourcesPointer = csgo.GetAbsoluteAddress((void*)(PlayerResourcesInstr), 3, 7);
-
-	unsigned long PostProcessInstr = (long)client.find(csgo,
-		"\x80\x3D\x00\x00\x00\x00\x00\x0F\x85\x00\x00\x00\x00\x85\xC9",
-		"xx????xxx????xx");
-
-	unsigned long PostProcessPointer = csgo.GetAbsoluteAddress((void*)PostProcessInstr, 2, 7);
 
 	if (dumpOffsets) {
 		Logger::address ("client_client.so:\t", client.start);
 		//Logger::address ("engine_client.so:\t", pEngine);
 
-		Logger::address ("Glow pointer:\t", addressOfGlowPointerOffset);
+		Logger::address ("Glow pointer:\t", offsets.addressOfGlowPointerOffset);
 		Logger::address ("GlowObject pointer:\t", csgo.m_addressOfGlowPointer);
 
-		Logger::address ("LocalPlayer function:\t", foundLocalPlayerLea);
+		Logger::address ("LocalPlayer function:\t", offsets.foundLocalPlayerLea);
 		Logger::address ("LocalPlayer address:\t", csgo.m_addressOfLocalPlayer);
 
 		Logger::address ("DT_CSPlayerResource pointer:\t", csgo.PlayerResourcesPointer);
@@ -219,11 +194,11 @@ int main()
 		}
 
 		bool postProcessOrig {0};
-		csgo.Read((void*) (PostProcessPointer), &postProcessOrig, sizeof(postProcessOrig));
+		csgo.Read((void*) (offsets.PostProcessPointer), &postProcessOrig, sizeof(postProcessOrig));
 
 		if (postProcessOrig != cfg.disablePostProcessing) {
 			if(cfg.disablePostProcessing == 0 || cfg.disablePostProcessing == 1) // prevent writes under 0 or over 1
-				csgo.Write((void*) (PostProcessPointer), &cfg.disablePostProcessing, sizeof(cfg.disablePostProcessing));
+				csgo.Write((void*) (offsets.PostProcessPointer), &cfg.disablePostProcessing, sizeof(cfg.disablePostProcessing));
 		}
 
         music_changer.ChangeMusic(cfg.musicKitID);
