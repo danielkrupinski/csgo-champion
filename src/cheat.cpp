@@ -227,7 +227,7 @@ void cheat::RCS(float sensitivity, float m_yaw, float m_pitch, Vector2D rcsValue
 	unsigned long localPlayer = 0;
 	unsigned int ShotsFired;
 	QAngle vecPunch;
-	QAngle angle;
+	QAngle angle {0.0,0.0,0.0};
 
 	csgo->Read((void*) csgo->m_addressOfLocalPlayer, &localPlayer, sizeof(long));
 
