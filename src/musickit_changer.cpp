@@ -33,8 +33,9 @@ MusicKitChanger::MusicKitChanger(remote::Handle* csgo_a, remote::MapModuleMemory
 void MusicKitChanger::ChangeMusic(unsigned MusicId)
 {
     spoofedMusicID = MusicId;
-    csgo->Read((void*) (csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4)), &originalMusicID, sizeof(originalMusicID));
-    if(csgo->m_addressOfPlayerResource && originalMusicID != spoofedMusicID)
+    unsigned currentId {0};
+    csgo->Read((void*) (csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4)), &currentId, sizeof(currentId));
+    if(csgo->m_addressOfPlayerResource && currentId != spoofedMusicID)
     {
         csgo->Write((void*) (csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4)), &spoofedMusicID, sizeof(spoofedMusicID));
         cout << "Changed music kit ID to " << dec << spoofedMusicID << " on address " << hex << csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4);
