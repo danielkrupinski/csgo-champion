@@ -164,11 +164,11 @@ namespace remote
             {
                 std::string pathname;
 
-                for (size_t ls = 0, i = 0; i < line.length(); i++)
+                for (size_t ls=0, i=0; i!=line.length(); ++i)
                 {
                     if (line.substr(i, 1).compare(" ") == 0)
                     {
-                        ls++;
+                        ++ls;
 
                         if (ls == 5)
                         {
