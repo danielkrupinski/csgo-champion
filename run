@@ -1,3 +1,4 @@
 #!/bin/bash
 
-sudo bin/champion
+cd bin
+sudo ./champion
