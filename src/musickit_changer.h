@@ -6,7 +6,7 @@
 class MusicKitChanger {
 public:
     MusicKitChanger(remote::Handle*, remote::MapModuleMemoryRegion*);
-    void ChangeMusic(int MusicId);
+    void ChangeMusic(unsigned MusicId);
 private:
     remote::Handle* csgo;
     unsigned long localPlayer {0};

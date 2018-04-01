@@ -30,7 +30,7 @@ MusicKitChanger::MusicKitChanger(remote::Handle* csgo_a, remote::MapModuleMemory
         return;
 }
 
-void MusicKitChanger::ChangeMusic(int MusicId)
+void MusicKitChanger::ChangeMusic(unsigned MusicId)
 {
     spoofedMusicID = MusicId;
     if(csgo->m_addressOfPlayerResource && originalMusicID != spoofedMusicID)
