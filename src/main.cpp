@@ -161,6 +161,8 @@ int main()
 	csgo.triggerKeyEnabled = cfg.triggerKeyEnabled;
 	csgo.keycodeTriggerKey = cfg.keycodeTriggerKey;
 
+    MusicKitChanger music_changer {&csgo, &client};
+
 	cout << CYAN << endl;
 	cout << " Champion for CS:GO initialized.\n"
 	        "  > created by: Daniel Krupiński\n";
@@ -224,7 +226,7 @@ int main()
 				csgo.Write((void*) (PostProcessPointer), &cfg.disablePostProcessing, sizeof(cfg.disablePostProcessing));
 		}
 
-        MusicKitChanger music_changer(cfg.musicKitID, &csgo, &client);
+        music_changer.ChangeMusic(cfg.musicKitID);
         NoFlash no_flash(&csgo, &client);
 		cheat::RCS(cfg.sensitivity, cfg.m_yaw, cfg.m_pitch, cfg.rcsValue, &csgo, &client);
 		cheat::FovChanger(cfg.iFov, &csgo, &client);

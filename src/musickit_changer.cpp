@@ -1,7 +1,7 @@
 #include "musickit_changer.h"
 
-MusicKitChanger::MusicKitChanger(int MusicID, remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
-    : spoofedMusicID{MusicID}
+MusicKitChanger::MusicKitChanger(remote::Handle* csgo_a, remote::MapModuleMemoryRegion* client)
+    : csgo{csgo_a}
 {
     if(!csgo || !client)
         return;
@@ -28,7 +28,11 @@ MusicKitChanger::MusicKitChanger(int MusicID, remote::Handle* csgo, remote::MapM
 
     if(!originalMusicID)
         return;
+}
 
+void MusicKitChanger::ChangeMusic(int MusicId)
+{
+    spoofedMusicID = MusicId;
     if(csgo->m_addressOfPlayerResource && originalMusicID != spoofedMusicID)
     {
         csgo->Write((void*) (csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4)), &spoofedMusicID, sizeof(spoofedMusicID));
