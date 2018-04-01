@@ -1,40 +1,34 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-struct Vector
-{
+struct Vector {
 	float x;
 	float y;
 	float z;
 };
 
-struct ColorRGBA
-{
+struct ColorRGBA {
 	double r;
 	double g;
 	double b;
 	double a;
 };
 
-struct Color
-{
+struct Color {
 	unsigned char _color[4];
 };
 
-struct Vector2D
-{
+struct Vector2D {
 	float x, y;
 };
 
-struct QAngle
-{
+struct QAngle {
 	float x;
 	float y;
 	float z;
 };
 
-struct Entity
-{
+struct Entity {
 	char __buf_0x00[0xCC]; // 0x0
 	Vector m_vecAbsVelocity; // 0xCC
 	Vector m_vecAbsOrigin; // 0xD8
@@ -83,8 +77,7 @@ struct Entity
 	unsigned char m_bEverHadPredictionErrorsForThisCommand; // 0xEC8
 };
 
-struct CCSPlayer
-{
+struct CCSPlayer {
 	char __buf_0x00[0x4144]; // 0x0
 	unsigned char m_bIsScoped; // 0x4144
 	char __buf_0x4145[0x1]; // 0x4145
