@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -rf CMakeFiles/ cmake_install.cmake CMakeCache.txt Makefile bin/champion bin/aqua.log
+rm -rf CMakeFiles/ cmake_install.cmake CMakeCache.txt Makefile bin/champion bin/aqua.log tool/upx/champion
