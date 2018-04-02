@@ -87,7 +87,7 @@ int main()
 
     Offsets offsets {csgo, client};
     Cfg cfg;
-    KeyListener keyListener {csgo, cfg};
+    KeyListener keyListener;
     cfg.display = keyListener.display;
     cfg.updateValues();
 	//unsigned long pEngine = remote::getModule("engine_client.so", csgo.GetPid());
@@ -136,7 +136,7 @@ int main()
 
 	while (csgo.IsRunning())
 	{
-        keyListener.listen();
+        keyListener.listen(csgo,cfg);
 
         try {
 			cheat::GlowAndTrigger(keyListener, cfg.colors, cfg.fullBloom, cfg.glowStyle, cfg.healthBased, cfg.rainbowOn, cfg.paintBlack, &csgo, &client);

@@ -17,12 +17,12 @@ class KeyListener {
 private:
     char keys[32];
 	char lastkeys[32];
-    remote::Handle csgo;
-    Cfg cfg;
+    //remote::Handle csgo;
+    //Cfg cfg;
 public:
     //void getKeyCodeState(KeyCode keyCode);
-    KeyListener(remote::Handle&, Cfg&);
-    void listen();
+    //KeyListener(remote::Handle&, Cfg&);
+    void listen(remote::Handle& csgo, Cfg& cfg);
     Display* display {XOpenDisplay(0)};
     bool getKeyCodeState(KeyCode);
 };

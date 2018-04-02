@@ -1,13 +1,13 @@
 #include "keylistener.h"
 
-KeyListener::KeyListener(remote::Handle& h, Cfg& c)
-    : csgo{h}, cfg{c}
-{
+//KeyListener::KeyListener(remote::Handle& h, Cfg& c)
+//    : csgo{h}, cfg{c}
+//{
 
-}
+//}
+//
 
-
-void KeyListener::listen()
+void KeyListener::listen(remote::Handle& csgo, Cfg& cfg)
 {
     XQueryKeymap(display, keys);
 
