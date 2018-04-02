@@ -38,6 +38,11 @@ void KeyListener::listen(remote::Handle& csgo, Cfg& cfg)
                         csgo.TriggerEnabled = !csgo.TriggerEnabled;
                         Logger::toggle("Trigger\t\t", csgo.TriggerEnabled);
                     }
+
+                    if (code == 71)
+                    {
+                        cfg.updateValues();
+                    }
                 }
             }
         }

@@ -130,7 +130,7 @@ int main()
 	cout << " Champion for CS:GO initialized.\n"
 	        "  > created by: Daniel Krupiński\n";
 	cout << RESET << endl;
-
+    
 	//char keys[32];
 	//char lastkeys[32];
 
