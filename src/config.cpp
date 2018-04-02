@@ -40,6 +40,7 @@ void Cfg::updateValues()
 	keycodeRCS =  XKeysymToKeycode(display, XStringToKeysym(getValue("rcsKey").c_str()));
 	keycodeTriggerToggle =  XKeysymToKeycode(display, XStringToKeysym(getValue("triggerToggleKey").c_str()));
 	keycodeTriggerKey =  XKeysymToKeycode(display, XStringToKeysym(getValue("triggerKey").c_str()));
+        keycodeRefreshKey =  XKeysymToKeycode(display, XStringToKeysym(getValue("refreshConfigKey").c_str()));
 
 	enemyRed = (::atof(getValue("glowRed").c_str()) / 255);
 	enemyGreen = (::atof(getValue("glowGreen").c_str()) / 255);
@@ -73,6 +74,7 @@ void Cfg::updateValues()
 	NoFlashEnabled = ::atof(getValue("noFlash").c_str());
 
 	triggerKeyEnabled = ::atof(getValue("triggerKeyEnabled").c_str());
+
 
 	colors =
 	{

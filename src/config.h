@@ -23,6 +23,7 @@ public:
     int keycodeRCS {0};
     int keycodeTriggerToggle {0};
     int keycodeTriggerKey {0};
+    int keycodeRefreshKey {0};
 
     double enemyRed {0.0};
     double enemyGreen {0.0};
