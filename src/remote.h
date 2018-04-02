@@ -49,49 +49,49 @@ namespace remote {
 
 	class Handle {
 	public:
-	unsigned long PlayerResourcesPointer {0};
+    	unsigned long PlayerResourcesPointer {0};
 
-	unsigned long m_addressOfGlowPointer {0};
-	unsigned long m_addressOfLocalPlayer {0};
-	unsigned long m_addressOfForceAttack {0};
-	unsigned long m_oAddressOfForceJump {0};
-	unsigned long m_addressOfAlt1 {0};
-	unsigned long m_addressOfOnGround {0};
-	unsigned long m_addressOfPlayerResource {0};
+    	unsigned long m_addressOfGlowPointer {0};
+    	unsigned long m_addressOfLocalPlayer {0};
+    	unsigned long m_addressOfForceAttack {0};
+    	unsigned long m_oAddressOfForceJump {0};
+    	unsigned long m_addressOfAlt1 {0};
+    	unsigned long m_addressOfOnGround {0};
+    	unsigned long m_addressOfPlayerResource {0};
 
-	unsigned long a_engine_client {0};
+    	unsigned long a_engine_client {0};
 
-	unsigned long m_dwEntityList {0};
+    	unsigned long m_dwEntityList {0};
 
-	bool GlowEnabled {0};
-	bool RCSEnabled {0};
-	bool TriggerEnabled {0};
-	bool NoFlashEnabled {0};
-	bool MusicKitChangerEnabled {0};
-	bool FovChangerEnabled {0};
-	bool triggerKeyEnabled {0};
-	int keycodeTriggerKey {0};
+    	bool GlowEnabled {0};
+    	bool RCSEnabled {0};
+    	bool TriggerEnabled {0};
+    	bool NoFlashEnabled {0};
+    	bool MusicKitChangerEnabled {0};
+    	bool FovChangerEnabled {0};
+    	bool triggerKeyEnabled {0};
+    	int keycodeTriggerKey {0};
 
-	Handle() : pid{-1} {}
-	Handle(pid_t target);
-	Handle(std::string target);
+    	Handle() : pid{-1} {}
+    	Handle(pid_t target);
+    	Handle(std::string target);
 
-	std::string GetPath();
-	std::string GetWorkingDirectory();
-	constexpr pid_t GetPid(){ return pid; }
+    	std::string GetPath();
+    	std::string GetWorkingDirectory();
+    	constexpr pid_t GetPid(){ return pid; }
 
-	void ParseMaps();
+    	void ParseMaps();
 
-	constexpr bool IsValid();
-	bool IsRunning();
+    	constexpr bool IsValid();
+    	bool IsRunning();
 
-	bool Write(void* address, void* buffer, size_t size);
-	bool Read(void* address, void* buffer, size_t size);
+    	bool Write(void* address, void* buffer, size_t size);
+    	bool Read(void* address, void* buffer, size_t size);
 
-	unsigned long GetCallAddress(void* address);
-	unsigned long GetAbsoluteAddress(void* address, int offset, int size);
+    	unsigned long GetCallAddress(void* address);
+    	unsigned long GetAbsoluteAddress(void* address, int offset, int size);
 
-	MapModuleMemoryRegion* GetRegionOfAddress(void* address);
+    	MapModuleMemoryRegion* GetRegionOfAddress(void* address);
 
 	private:
 		std::string GetSymbolicLinkTarget(std::string target);
