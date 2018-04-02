@@ -3,4 +3,11 @@
 cmake . || exit 1
 make -j$(grep "^processor" /proc/cpuinfo | wc -l) "$@" || exit 1
 
+mv bin/champion tool/upx/
+
+cd tool/upx/
+./upx --brute champion
+
+mv champion ../../bin/champion
+
 echo "All done!"
