@@ -1,3 +1,5 @@
+#ifndef CONFIG_H
+#define CONFIG_H
 #include <libconfig.h++>
 #include "types.h"
 #include <X11/Xlib.h>
@@ -10,7 +12,8 @@
 
 class Cfg {
 public:
-    Cfg(Display* d) : display{d} {};
+    Cfg(Cfg& a) {};
+    Cfg() {};
     std::string getValue(std::string property);
     void updateValues();
 //private:
@@ -56,3 +59,5 @@ public:
 
     bool triggerKeyEnabled {0};
 };
+
+#endif // CONFIG_H

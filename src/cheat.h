@@ -16,6 +16,7 @@
 #include "remote.h"
 #include "types.h"
 #include "logger.h"
+#include "keylistener.h"
 
 extern "C"
 {
@@ -104,7 +105,7 @@ namespace cheat
 		unsigned int unk5; // 0028 (054612E8)
 	};
 
-	extern void GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool healthBased, bool rainbow, bool paintBlack, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
+	extern void GlowAndTrigger(KeyListener&, ColorRGBA colors, bool fullBloom, int glowStyle, bool healthBased, bool rainbow, bool paintBlack, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 	extern void RCS(float sensitivity, float m_yaw, float m_pitch, Vector2D rcsValue, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 	//extern void SpoofMusicKit(int MusicID, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);
 	extern void FovChanger(int fov, remote::Handle* csgo, remote::MapModuleMemoryRegion* client);

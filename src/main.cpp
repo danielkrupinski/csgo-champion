@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
+//#include <X11/Xlib.h>
+//#include <X11/Xutil.h>
 
-#include <X11/keysym.h>
-#include <X11/keysymdef.h>
+//#include <X11/keysym.h>
+//#include <X11/keysymdef.h>
 
-#include <X11/extensions/XTest.h>
+//#include <X11/extensions/XTest.h>
 
 #include <unistd.h>
 #include <string>
@@ -16,7 +16,7 @@
 #include <chrono>
 #include <thread>
 #include <libconfig.h++>
-
+#include "keylistener.h"
 #include "remote.h"
 #include "cheat.h"
 #include "logger.h"
@@ -30,23 +30,9 @@ using namespace std;
 
 constexpr bool dumpOffsets {0}; // set to 1 if you want to dump offsets
 
-Display* display = XOpenDisplay(0);
+//Display* display {XOpenDisplay(0)};
 
-Cfg cfg {display};
-
-bool GetKeyCodeState(KeyCode keyCode)
-{
-    if (!display)
-    {
-        return false;
-    }
-
-    char szKey[32];
-
-    XQueryKeymap(display, szKey);
-
-    return szKey[keyCode / 8] & (1 << (keyCode % 8));
-}
+//Cfg cfg {display};
 
 int main()
 {
@@ -57,8 +43,6 @@ int main()
 		Logger::error(string("You need to be ") + UNDERLINE + "root");
 		return 0;
 	}
-
-	cfg.updateValues();
 
 	remote::Handle csgo;
 
@@ -102,6 +86,10 @@ int main()
 	client.client_start = client.start;
 
     Offsets offsets {csgo, client};
+    Cfg cfg;
+    KeyListener keyListener {csgo, cfg};
+    cfg.display = keyListener.display;
+    cfg.updateValues();
 	//unsigned long pEngine = remote::getModule("engine_client.so", csgo.GetPid());
 
 	/*if (pEngine == 0)
@@ -143,49 +131,15 @@ int main()
 	        "  > created by: Daniel Krupiński\n";
 	cout << RESET << endl;
 
-	char keys[32];
-	char lastkeys[32];
+	//char keys[32];
+	//char lastkeys[32];
 
 	while (csgo.IsRunning())
 	{
-		XQueryKeymap(display, keys);
-
-		for (int i=0; i!=sizeof(keys); ++i)
-		{
-			if (keys[i] != lastkeys[i])
-			{
-				for (int j=0, test=1; j!=8; ++j, test*=2)
-				{
-					if ((keys[i] & test) && ((keys[i] & test) != (lastkeys[i] & test)))
-					{
-						const int code = i * 8 + j;
-
-						if (code == cfg.keycodeGlow)
-						{
-							csgo.GlowEnabled = !csgo.GlowEnabled;
-							Logger::toggle("Glow ESP\t\t", csgo.GlowEnabled);
-						}
-
-						if (code == cfg.keycodeRCS)
-						{
-							csgo.RCSEnabled = !csgo.RCSEnabled;
-							Logger::toggle("RCS\t\t", csgo.RCSEnabled);
-						}
-
-						if (code == cfg.keycodeTriggerToggle)
-						{
-							csgo.TriggerEnabled = !csgo.TriggerEnabled;
-							Logger::toggle("Trigger\t\t", csgo.TriggerEnabled);
-						}
-					}
-				}
-			}
-
-			lastkeys[i] = keys[i];
-		}
+        keyListener.listen();
 
         try {
-			cheat::GlowAndTrigger(cfg.colors, cfg.fullBloom, cfg.glowStyle, cfg.healthBased, cfg.rainbowOn, cfg.paintBlack, &csgo, &client);
+			cheat::GlowAndTrigger(keyListener, cfg.colors, cfg.fullBloom, cfg.glowStyle, cfg.healthBased, cfg.rainbowOn, cfg.paintBlack, &csgo, &client);
 		}
 
 		catch (int exception) {

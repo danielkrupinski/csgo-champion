@@ -1,5 +1,6 @@
 #include "cheat.h"
 #include <cmath>
+#include "keylistener.h"
 
 struct iovec g_remote[1024], g_local[1024];
 struct cheat::GlowObjectDefinition_t g_glow[1024];
@@ -41,7 +42,7 @@ void rcsNormalize(Vector2D& value)
 		value.y = 0.f;
 }
 
-void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool healthBased, bool rainbow, bool paintBlack, remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
+void cheat::GlowAndTrigger(KeyListener& k, ColorRGBA colors, bool fullBloom, int glowStyle, bool healthBased, bool rainbow, bool paintBlack, remote::Handle* csgo, remote::MapModuleMemoryRegion* client)
 {
 	if (!csgo || !client)
 		return;
@@ -130,7 +131,7 @@ void cheat::GlowAndTrigger(ColorRGBA colors, bool fullBloom, int glowStyle, bool
 								{
 									if(csgo->triggerKeyEnabled)
 									{
-										if(GetKeyCodeState(csgo->keycodeTriggerKey))
+										if(k.getKeyCodeState(csgo->keycodeTriggerKey))
 										{
 											xdo_mouse_down(xdo, CURRENTWINDOW, 1);
 											xdo_mouse_up(xdo, CURRENTWINDOW, 1);
