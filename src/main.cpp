@@ -1,13 +1,5 @@
 #include <iostream>
 
-//#include <X11/Xlib.h>
-//#include <X11/Xutil.h>
-
-//#include <X11/keysym.h>
-//#include <X11/keysymdef.h>
-
-//#include <X11/extensions/XTest.h>
-
 #include <unistd.h>
 #include <string>
 #include <cstdio>
@@ -23,16 +15,10 @@
 #include "config.h"
 #include "noflash.h"
 #include "musickit_changer.h"
-//#include "offsets.h"
 
 using namespace std;
-//using namespace libconfig;
 
 constexpr bool dumpOffsets {0}; // set to 1 if you want to dump offsets
-
-//Display* display {XOpenDisplay(0)};
-
-//Cfg cfg {display};
 
 int main()
 {
@@ -86,22 +72,10 @@ int main()
 	client.client_start = client.start;
 
     csgo.findOffsets(client);
-    //Offsets offsets {csgo, client};
     Cfg cfg;
     KeyListener keyListener;
     cfg.display = keyListener.display;
     cfg.updateValues();
-	//unsigned long pEngine = remote::getModule("engine_client.so", csgo.GetPid());
-
-	/*if (pEngine == 0)
-	{
-		Logger::error("Couldn't find engine module!");
-		return 0;
-	}*/
-
-	//csgo.a_engine_client = pEngine;
-
-
 
 	if (dumpOffsets) {
 		Logger::address ("client_client.so:\t", client.start);
@@ -131,9 +105,6 @@ int main()
 	cout << " Champion for CS:GO initialized.\n"
 	        "  > created by: Daniel Krupiński\n";
 	cout << RESET << endl;
-
-	//char keys[32];
-	//char lastkeys[32];
 
 	while (csgo.IsRunning())
 	{
