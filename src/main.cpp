@@ -58,7 +58,7 @@ int main()
 		return 0;
 	}
 
-	cfg.updateConfigValues();
+	cfg.updateValues();
 
 	remote::Handle csgo;
 

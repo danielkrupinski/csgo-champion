@@ -11,8 +11,8 @@
 class Cfg {
 public:
     Cfg(Display* d) : display{d} {};
-    std::string getConfigValue(std::string property);
-    void updateConfigValues();
+    std::string getValue(std::string property);
+    void updateValues();
 //private:
     libconfig::Config cfg;
     Display* display;

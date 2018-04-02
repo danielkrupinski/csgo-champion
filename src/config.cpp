@@ -4,7 +4,7 @@
 using namespace std;
 using namespace libconfig;
 
-string Cfg::getConfigValue(string property)
+string Cfg::getValue(string property)
 {
 	try {
 		string name = cfg.lookup(property);
@@ -20,7 +20,7 @@ string Cfg::getConfigValue(string property)
 	return nullptr;
 }
 
-void Cfg::updateConfigValues()
+void Cfg::updateValues()
 {
 	try {
 		cfg.readFile("config.cfg");
