@@ -23,7 +23,7 @@
 #include "config.h"
 #include "noflash.h"
 #include "musickit_changer.h"
-#include "offsets.h"
+//#include "offsets.h"
 
 using namespace std;
 //using namespace libconfig;
@@ -85,7 +85,8 @@ int main()
 
 	client.client_start = client.start;
 
-    Offsets offsets {csgo, client};
+    csgo.findOffsets(client);
+    //Offsets offsets {csgo, client};
     Cfg cfg;
     KeyListener keyListener;
     cfg.display = keyListener.display;
@@ -106,10 +107,10 @@ int main()
 		Logger::address ("client_client.so:\t", client.start);
 		//Logger::address ("engine_client.so:\t", pEngine);
 
-		Logger::address ("Glow pointer:\t", offsets.addressOfGlowPointerOffset);
+		Logger::address ("Glow pointer:\t", csgo.addressOfGlowPointerOffset);
 		Logger::address ("GlowObject pointer:\t", csgo.m_addressOfGlowPointer);
 
-		Logger::address ("LocalPlayer function:\t", offsets.foundLocalPlayerLea);
+		Logger::address ("LocalPlayer function:\t", csgo.foundLocalPlayerLea);
 		Logger::address ("LocalPlayer address:\t", csgo.m_addressOfLocalPlayer);
 
 		Logger::address ("DT_CSPlayerResource pointer:\t", csgo.PlayerResourcesPointer);
@@ -130,7 +131,7 @@ int main()
 	cout << " Champion for CS:GO initialized.\n"
 	        "  > created by: Daniel Krupiński\n";
 	cout << RESET << endl;
-    
+
 	//char keys[32];
 	//char lastkeys[32];
 
@@ -148,11 +149,11 @@ int main()
 		}
 
 		bool postProcessOrig {0};
-		csgo.Read((void*) (offsets.PostProcessPointer), &postProcessOrig, sizeof(postProcessOrig));
+		csgo.Read((void*) (csgo.PostProcessPointer), &postProcessOrig, sizeof(postProcessOrig));
 
 		if (postProcessOrig != cfg.disablePostProcessing) {
 			if(cfg.disablePostProcessing == 0 || cfg.disablePostProcessing == 1) // prevent writes under 0 or over 1
-				csgo.Write((void*) (offsets.PostProcessPointer), &cfg.disablePostProcessing, sizeof(cfg.disablePostProcessing));
+				csgo.Write((void*) (csgo.PostProcessPointer), &cfg.disablePostProcessing, sizeof(cfg.disablePostProcessing));
 		}
 
         music_changer.ChangeMusic(cfg.musicKitID);

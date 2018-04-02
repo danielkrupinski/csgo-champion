@@ -59,6 +59,15 @@ namespace remote {
     	unsigned long m_addressOfOnGround {0};
     	unsigned long m_addressOfPlayerResource {0};
 
+        unsigned long localPlayer {0};
+        unsigned int localPlayerIndex {0};
+        unsigned long glowcalladdr {0};
+        int addressOfGlowPointerOffset {0};
+        unsigned long foundLocalPlayerLea {0};
+        unsigned long PlayerResourcesInstr {0};
+        unsigned long PostProcessInstr {0};
+        unsigned long PostProcessPointer {0};
+
     	unsigned long a_engine_client {0};
 
     	unsigned long m_dwEntityList {0};
@@ -92,6 +101,7 @@ namespace remote {
     	unsigned long GetAbsoluteAddress(void* address, int offset, int size);
 
     	MapModuleMemoryRegion* GetRegionOfAddress(void* address);
+        void findOffsets(remote::MapModuleMemoryRegion&);
 
 	private:
 		std::string GetSymbolicLinkTarget(std::string target);
