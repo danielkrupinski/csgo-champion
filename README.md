@@ -2,8 +2,9 @@
 
 A linux 64-bit CS:GO **training software**
 
-**VAC status**
-Undetected
+
+## VAC status
+**Undetected**
 
 
 Features:
