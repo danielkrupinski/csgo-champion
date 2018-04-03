@@ -7,7 +7,7 @@ A linux 64-bit CS:GO **training software**
 **Undetected**
 
 
-Features:
+## Features:
 * *Glow ESP*
 * *Trigger Bot*
 * *RCS*
