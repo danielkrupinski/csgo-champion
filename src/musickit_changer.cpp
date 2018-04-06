@@ -33,12 +33,12 @@ MusicKitChanger::MusicKitChanger(remote::Handle* csgo_a, remote::MapModuleMemory
 void MusicKitChanger::ChangeMusic(unsigned MusicId)
 {
     spoofedMusicID = MusicId;
-    unsigned currentId {0};
-    csgo->Read((void*) (csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4)), &currentId, sizeof(currentId));
-    if(csgo->m_addressOfPlayerResource && currentId != spoofedMusicID)
+    std::chrono::steady_clock::time_point currTime = std::chrono::steady_clock::now();
+    if(csgo->m_addressOfPlayerResource && std::chrono::duration_cast<std::chrono::seconds>(currTime-start).count() > 5)
     {
         csgo->Write((void*) (csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4)), &spoofedMusicID, sizeof(spoofedMusicID));
         cout << "Changed music kit ID to " << dec << spoofedMusicID << " on address " << hex << csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4);
         cout << " on entity index " << dec << LocalPlayerIndex << endl;
+        lastUpdate = std::chrono::steady_clock::now();
     }
 }
