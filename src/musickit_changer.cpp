@@ -34,7 +34,7 @@ void MusicKitChanger::ChangeMusic(unsigned MusicId)
 {
     spoofedMusicID = MusicId;
     std::chrono::steady_clock::time_point currTime = std::chrono::steady_clock::now();
-    if(csgo->m_addressOfPlayerResource && std::chrono::duration_cast<std::chrono::seconds>(currTime-start).count() > 5)
+    if(csgo->m_addressOfPlayerResource && std::chrono::duration_cast<std::chrono::seconds>(currTime-lastUpdate).count() > 5)
     {
         csgo->Write((void*) (csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4)), &spoofedMusicID, sizeof(spoofedMusicID));
         cout << "Changed music kit ID to " << dec << spoofedMusicID << " on address " << hex << csgo->m_addressOfPlayerResource + 0x5020 + (LocalPlayerIndex * 4);
